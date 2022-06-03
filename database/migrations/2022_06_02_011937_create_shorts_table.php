@@ -18,7 +18,7 @@ return new class extends Migration
             $table->uuid();
             $table->string('creator_identify');
             $table->string('url');
-            $table->string('description', 150)->nullable();
+            $table->text('description', 200)->nullable();
             $table->timestamps();
         });
     }

@@ -14,22 +14,22 @@ class ShortRepository
         $this->model = $model;
     }
 
-    public function getAll(array $filters, int $page) : Collection
+    public function getAll(array $filters, int $page)
     {
-        return $this->model->paginate();
+        return $this->model->paginate($page);
     }
 
-    public function store(array $data) : Short
+    public function store(array $data)
     {
         return $this->model->create($data);
     }
 
-    public function getByIdentify(string $identify) : Short
+    public function getByIdentify(string $identify)
     {
         return $this->model->where('uuid', $identify)->firstOrFail();
     }
 
-    public function update(array $data, string $identify)  : Short
+    public function update(array $data, string $identify)
     {
         $model = $this->getByIdentify($identify); 
 
@@ -38,7 +38,7 @@ class ShortRepository
         return $model;
     }
 
-    public function delete(string $indetify) : void
+    public function delete(string $indetify)
     {
         $model = $this->getByIdentify($indetify); 
 

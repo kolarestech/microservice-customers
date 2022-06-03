@@ -13,8 +13,8 @@ class ShortUpdateAction
         $this->repository = $shortRepository;
     }
 
-    function exec(array $data)
+    function exec(array $data, string $identify)
     {
-        return $this->repository->update($data, $data['uuid']);
+        return $this->repository->update($data, $identify);
     }
 }

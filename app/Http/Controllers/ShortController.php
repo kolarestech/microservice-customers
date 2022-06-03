@@ -45,7 +45,7 @@ class ShortController extends Controller
      */
     public function store(ShortStoreRequest $request, ShortStoreAction $action)
     {
-        $data = $action->exec($request->al());
+        $data = $action->exec($request->all());
 
         return new ShortStoreResource($data);
     }
@@ -74,7 +74,7 @@ class ShortController extends Controller
      */
     public function update(ShortUpdateRequest $request, string $identify, ShortUpdateAction $action)
     {
-        $data = $action->exec($request->al());
+        $data = $action->exec($request->all(), $identify);
 
         return new ShortUpdateResource($data);
     }

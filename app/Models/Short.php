@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Short extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'uuid', 'description', 'creator_identify', 'url'
+    ];
 }
