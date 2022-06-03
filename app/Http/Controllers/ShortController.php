@@ -74,7 +74,7 @@ class ShortController extends Controller
      */
     public function update(ShortUpdateRequest $request, string $identify, ShortUpdateAction $action)
     {
-        $data = $action->exec($request->all(), $identify);
+        $data = $action->exec($request->validated(), $identify);
 
         return new ShortUpdateResource($data);
     }

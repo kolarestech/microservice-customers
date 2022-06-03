@@ -24,7 +24,7 @@ class ShortUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "description" => ['nullable', 'min:3', 'max:200']
+            "description" => ['required', 'min:3', 'max:200']
         ];
     }
 }
