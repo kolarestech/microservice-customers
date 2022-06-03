@@ -24,7 +24,7 @@ class ShortStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            "url" => ['required'],
+            "url" => ['required', 'url'],
             "creator_identify" => ['required'],
             "description" => ['nullable', 'min:3', 'max:200']
         ];

@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ShortStoreResource extends JsonResource
@@ -14,6 +15,11 @@ class ShortStoreResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'description' => $this->description,
+            'url' => $this->url,
+            'creator_identify' => $this->creator_identify,
+            'date_created' => Carbon::make($this->created_at)->format('d/m/Y')
+        ];
     }
 }
