@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('shorts', function (Blueprint $table) {
             $table->id();
+            $table->uuid();
+            $table->string('creator_identify');
+            $table->string('url');
+            $table->string('description', 150)->nullable();
             $table->timestamps();
         });
     }

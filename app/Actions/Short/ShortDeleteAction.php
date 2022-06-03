@@ -4,7 +4,7 @@ namespace App\Actions\Short;
 
 use App\Repositories\ShortRepository;
 
-class ShortUpdateAction
+class ShortDeleteAction
 {
     protected $repository;
 
@@ -13,8 +13,8 @@ class ShortUpdateAction
         $this->repository = $shortRepository;
     }
 
-    function exec(array $data)
+    function exec(string $identify)
     {
-        return $this->repository->update($data, $data['uuid']);
+        $this->repository->delete($identify);
     }
 }

@@ -2,39 +2,39 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ShortStoreRequest;
-use App\Http\Requests\ShortUpdateRequest;
+use App\Actions\Short\{
+    ShortDeleteAction,
+    ShortIndexAction,
+    ShortShowAction,
+    ShortStoreAction,
+    ShortUpdateAction
+};
+use App\Http\Requests\{
+    ShortDeleteRequest,
+    ShortIndexRequest,
+    ShortShowRequest,
+    ShortStoreRequest,
+    ShortUpdateRequest
+};
+use App\Http\Resources\{
+    ShortIndexResource,
+    ShortShowResource,
+    ShortStoreResource,
+    ShortUpdateResource
+};
 
 class ShortController extends Controller
 {
-    /**
-     * Construct
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(ShortIndexRequest $request, ShortIndexAction $action)
     {
-        //
-    }
+        $data = $action->exec($request->all());
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return ShortIndexResource::collection($data);
     }
 
     /**
@@ -43,9 +43,11 @@ class ShortController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ShortStoreRequest $request)
+    public function store(ShortStoreRequest $request, ShortStoreAction $action)
     {
-        //
+        $data = $action->exec($request->al());
+
+        return new ShortStoreResource($data);
     }
 
     /**
@@ -54,32 +56,27 @@ class ShortController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ShortShowRequest $request, string $identify, ShortShowAction $action)
     {
-        //
-    }
+        $data = $action->exec($identify);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return new ShortShowResource($data);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  ShortUpdateRequest  $request
+     * @param  string  $identify
+     * @param  ShortUpdateAction $action
+     * 
      * @return \Illuminate\Http\Response
      */
-    public function update(ShortUpdateRequest $request, $id)
+    public function update(ShortUpdateRequest $request, string $identify, ShortUpdateAction $action)
     {
-        //
+        $data = $action->exec($request->al());
+
+        return new ShortUpdateResource($data);
     }
 
     /**
@@ -88,8 +85,10 @@ class ShortController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(ShortDeleteRequest $request, string $identify, ShortDeleteAction $action)
     {
-        //
+        $action->exec($identify);
+
+        return response()->json(['success' => true]);
     }
 }
