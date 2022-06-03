@@ -13,6 +13,13 @@ class ShortDeleteAction
         $this->repository = $shortRepository;
     }
 
+    /**
+     * delete a entity by uuid
+     * 
+     * @param string $identity
+     * 
+     * @return void
+     */
     function exec(string $identify)
     {
         $this->repository->delete($identify);

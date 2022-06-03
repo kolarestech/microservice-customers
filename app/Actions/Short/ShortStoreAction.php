@@ -13,6 +13,13 @@ class ShortStoreAction
         $this->repository = $shortRepository;
     }
 
+    /**
+     * create a new entity
+     * 
+     * @param array $data
+     * 
+     * @return object $data
+     */
     function exec(array $data)
     {
         return $this->repository->store($data);
