@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShortIndexRequest extends FormRequest
+class CreatorShowRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class ShortIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            "page" => ['required'],
+            //
         ];
     }
 }

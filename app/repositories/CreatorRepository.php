@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Models\Short;
+use App\Models\Creator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 
-class ShortRepository
+class CreatorRepository
 {
     /**
      * model instance
@@ -20,9 +20,9 @@ class ShortRepository
      * 
      * @var const CACHE_MODULE
      */
-    const CACHE_MODULE = 'shorts';
+    const CACHE_MODULE = 'creators';
 
-    function __construct(Short $model)
+    function __construct(Creator $model)
     {
         $this->model = $model;
     }
@@ -37,7 +37,7 @@ class ShortRepository
      */
     public function getAll(array $filters, int $page)
     {
-        return Cache::rememberForever('shorts', function () use ($page, $filters) {
+        return Cache::rememberForever('creators', function () use ($page, $filters) {
             return $this->model->paginate($page);
         });
     }
@@ -51,7 +51,7 @@ class ShortRepository
      */
     public function store(array $data)
     {
-        Cache::forget('shorts');
+        Cache::forget('creators');
 
         $model = $this->model->create($data);
 
@@ -67,7 +67,7 @@ class ShortRepository
      */
     public function getByIdentify(string $identify)
     {
-        return Cache::rememberForever('shorts'.$identify, function () use ($identify) {
+        return Cache::rememberForever('creators'.$identify, function () use ($identify) {
             return $this->model->where('uuid', $identify)->firstOrFail();
         });
     }
@@ -86,8 +86,8 @@ class ShortRepository
 
         $model->update($data);
 
-        Cache::forget('shorts');
-        Cache::forget('shorts'.$identify);
+        Cache::forget('creators');
+        Cache::forget('creators'.$identify);
 
         return $model;
     }
@@ -105,7 +105,7 @@ class ShortRepository
 
         $model->delete();
 
-        Cache::forget('shorts'.$indetify);
-        Cache::forget('shorts');
+        Cache::forget('creators'.$indetify);
+        Cache::forget('creators');
     }
 }

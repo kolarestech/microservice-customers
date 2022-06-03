@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\ShortController;
+use App\Http\Controllers\CreatorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('shorts', [ShortController::class, 'index']);
-Route::post('shorts', [ShortController::class, 'store']);
-Route::get('shorts/{identify}', [ShortController::class, 'show']);
-Route::put('shorts/{identify}', [ShortController::class, 'update']);
-Route::delete('shorts/{identify}', [ShortController::class, 'destroy']);
+Route::get('creators', [CreatorController::class, 'index']);
+Route::post('creators', [CreatorController::class, 'store']);
+Route::get('creators/{identify}', [CreatorController::class, 'show']);
+Route::put('creators/{identify}', [CreatorController::class, 'update']);
+Route::delete('creators/{identify}', [CreatorController::class, 'destroy']);
 

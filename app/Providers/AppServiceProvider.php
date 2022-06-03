@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\Short;
-use App\Observers\ShortObserver;
+use App\Models\Creator;
+use App\Observers\CreatorObserver;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Short::observe(ShortObserver::class);
+        Creator::observe(CreatorObserver::class);
     }
 }

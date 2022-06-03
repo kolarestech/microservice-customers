@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Actions\Short;
+namespace App\Actions\Creator;
 
-use App\Repositories\ShortRepository;
+use App\Repositories\CreatorRepository;
 
-class ShortDeleteAction
+class CreatorDeleteAction
 {
     protected $repository;
 
-    function __construct(ShortRepository $shortRepository)
+    function __construct(CreatorRepository $repository)
     {
-        $this->repository = $shortRepository;
+        $this->repository = $repository;
     }
 
     /**

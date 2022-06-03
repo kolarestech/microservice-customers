@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShortShowRequest extends FormRequest
+class CreatorUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,11 @@ class ShortShowRequest extends FormRequest
      */
     public function rules()
     {
+        $uuid = $this->creator ?? '';
+        
         return [
-            //
+            "name" => ['required', 'min:3', 'max:150', "unique:creators,name,{$uuid},uuid"],
+            "about" => ['nullable', 'min:3', 'max:9999']
         ];
     }
 }

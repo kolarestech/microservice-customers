@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ShortUpdateResource extends JsonResource
+class CreatorUpdateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,10 @@ class ShortUpdateResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'description' => $this->description,
-            'url' => $this->url,
-            'creator_identify' => $this->creator_identify,
+            'name' => $this->name,
+            'slug' => $this->slug,
+            'identify' => $this->uuid,
+            'about' => $this->about,
             'date_created' => $this->created_at,
             'date_updated' => $this->updated_at
         ];

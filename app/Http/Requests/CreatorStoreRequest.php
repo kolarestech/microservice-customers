@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ShortUpdateRequest extends FormRequest
+class CreatorStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,8 @@ class ShortUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            "description" => ['required', 'min:3', 'max:200']
+            "name" => ['required', 'min:3', 'max:150', 'unique:creators,name'],
+            "about" => ['nullable', 'min:3', 'max:99999']
         ];
     }
 }
