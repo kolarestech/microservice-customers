@@ -19,7 +19,8 @@ class ShortUpdateResource extends JsonResource
             'description' => $this->description,
             'url' => $this->url,
             'creator_identify' => $this->creator_identify,
-            'date_created' => Carbon::make($this->created_at)->format('d/m/Y')
+            'date_created' => $this->created_at,
+            'date_updated' => $this->updated_at
         ];
     }
 }

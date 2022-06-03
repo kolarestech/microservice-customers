@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Short;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class ShortRepository
 {
@@ -13,6 +14,13 @@ class ShortRepository
      * @var $model
      */
     protected $model;
+
+    /**
+     * cache module
+     * 
+     * @var const CACHE_MODULE
+     */
+    const CACHE_MODULE = 'shorts';
 
     function __construct(Short $model)
     {
@@ -29,7 +37,9 @@ class ShortRepository
      */
     public function getAll(array $filters, int $page)
     {
-        return $this->model->paginate($page);
+        return Cache::rememberForever('shorts', function () use ($page, $filters) {
+            return $this->model->paginate($page);
+        });
     }
 
     /**
@@ -41,7 +51,11 @@ class ShortRepository
      */
     public function store(array $data)
     {
-        return $this->model->create($data);
+        Cache::forget('shorts');
+
+        $model = $this->model->create($data);
+
+        return $model;
     }
 
     /**
@@ -51,10 +65,11 @@ class ShortRepository
      * 
      * @return object $model
      */
-    public function getByIdentify(string $identify, bool $relations = null)
+    public function getByIdentify(string $identify)
     {
-        return $this->model->with($relations ?? [])
-                ->where('uuid', $identify)->firstOrFail();
+        return Cache::rememberForever('shorts'.$identify, function () use ($identify) {
+            return $this->model->where('uuid', $identify)->firstOrFail();
+        });
     }
 
     /**
@@ -71,6 +86,9 @@ class ShortRepository
 
         $model->update($data);
 
+        Cache::forget('shorts');
+        Cache::forget('shorts'.$identify);
+
         return $model;
     }
 
@@ -86,5 +104,7 @@ class ShortRepository
         $model = $this->getByIdentify($indetify); 
 
         $model->delete();
+
+        Cache::forget('shorts');
     }
 }
