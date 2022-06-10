@@ -17,6 +17,8 @@ services:
             - redis
         networks:
             - service_creators_network
+        extra_hosts:
+            - host.docker.internal:host-gateway
 
     # nginx
     nginx:
