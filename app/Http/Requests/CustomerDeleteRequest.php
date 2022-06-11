@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatorIndexRequest extends FormRequest
+class CustomerDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,7 @@ class CreatorIndexRequest extends FormRequest
     public function rules()
     {
         return [
-            "page" => ['required'],
+            //
         ];
     }
 }

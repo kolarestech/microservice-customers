@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CreatorController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('creators', [CreatorController::class, 'index']);
-Route::post('creators', [CreatorController::class, 'store']);
-Route::get('creators/{identify}', [CreatorController::class, 'show']);
-Route::put('creators/{identify}', [CreatorController::class, 'update']);
-Route::delete('creators/{identify}', [CreatorController::class, 'destroy']);
+Route::get('customers', [CustomerController::class, 'index']);
+Route::post('customers', [CustomerController::class, 'store']);
+Route::get('customers/{identify}', [CustomerController::class, 'show']);
+Route::put('customers/{identify}', [CustomerController::class, 'update']);
+Route::delete('customers/{identify}', [CustomerController::class, 'destroy']);
 

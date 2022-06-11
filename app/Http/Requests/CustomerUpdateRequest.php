@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreatorDeleteRequest extends FormRequest
+class CustomerUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,8 +23,12 @@ class CreatorDeleteRequest extends FormRequest
      */
     public function rules()
     {
+        $uuid = $this->customer ?? '';
+        
         return [
-            //
+            "name" => ['required', 'min:3', 'max:150', "unique:customers,email,{$uuid},uuid"],
+            "email" => ['required', 'email', "unique:customers,email,{$uuid},uuid"],
+            "about" => ['nullable', 'min:3', 'max:9999']
         ];
     }
 }

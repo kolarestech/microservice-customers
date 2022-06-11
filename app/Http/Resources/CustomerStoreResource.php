@@ -2,9 +2,10 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CreatorIndexResource extends JsonResource
+class CustomerStoreResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,6 +17,7 @@ class CreatorIndexResource extends JsonResource
     {
         return [
             'name' => $this->name,
+            'email' => $this->email,
             'slug' => $this->slug,
             'identify' => $this->uuid,
             'about' => $this->about,

@@ -2,11 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Models\Creator;
+use App\Models\Customer;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
 
-class CreatorRepository
+class CustomerRepository
 {
     /**
      * model instance
@@ -20,9 +20,9 @@ class CreatorRepository
      * 
      * @var const CACHE_MODULE
      */
-    const CACHE_MODULE = 'creators';
+    const CACHE_MODULE = 'customers';
 
-    function __construct(Creator $model)
+    function __construct(Customer $model)
     {
         $this->model = $model;
     }
@@ -37,9 +37,9 @@ class CreatorRepository
      */
     public function getAll(array $filters, int $page)
     {
-        //return Cache::rememberForever('creators', function () use ($page, $filters) {
+        return Cache::rememberForever('customers', function () use ($page, $filters) {
             return $this->model->paginate($page);
-        //});
+        });
     }
 
     /**
@@ -51,7 +51,7 @@ class CreatorRepository
      */
     public function store(array $data)
     {
-        Cache::forget('creators');
+        Cache::forget('customers');
 
         $model = $this->model->create($data);
 
@@ -67,7 +67,7 @@ class CreatorRepository
      */
     public function getByIdentify(string $identify)
     {
-        return Cache::rememberForever('creators'.$identify, function () use ($identify) {
+        return Cache::rememberForever('customers'.$identify, function () use ($identify) {
             return $this->model->where('uuid', $identify)->firstOrFail();
         });
     }
@@ -86,8 +86,8 @@ class CreatorRepository
 
         $model->update($data);
 
-        Cache::forget('creators');
-        Cache::forget('creators'.$identify);
+        Cache::forget('customers');
+        Cache::forget('customers'.$identify);
 
         return $model;
     }
@@ -105,7 +105,7 @@ class CreatorRepository
 
         $model->delete();
 
-        Cache::forget('creators'.$indetify);
-        Cache::forget('creators');
+        Cache::forget('customers'.$indetify);
+        Cache::forget('customers');
     }
 }

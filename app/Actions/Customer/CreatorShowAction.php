@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Actions\Creator;
+namespace App\Actions\Customer;
 
-use App\Repositories\CreatorRepository;
+use App\Repositories\CustomerRepository;
 
-class CreatorShowAction
+class CustomerShowAction
 {
     protected $repository;
 
-    function __construct(CreatorRepository $repository)
+    function __construct(CustomerRepository $repository)
     {
         $this->repository = $repository;
     }
