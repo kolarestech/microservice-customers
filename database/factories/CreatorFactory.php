@@ -17,7 +17,8 @@ class CreatorFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "name" => $this->faker->name(),
+            "about" => $this->faker->text(160)
         ];
     }
 }

@@ -37,9 +37,9 @@ class CreatorRepository
      */
     public function getAll(array $filters, int $page)
     {
-        return Cache::rememberForever('creators', function () use ($page, $filters) {
+        //return Cache::rememberForever('creators', function () use ($page, $filters) {
             return $this->model->paginate($page);
-        });
+        //});
     }
 
     /**
